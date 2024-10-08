@@ -186,7 +186,7 @@ type RemoteConfig struct {
 	// of (condition name : value). Order doesn't affect semantics, and so
 	// is
 	// sorted by the server. The 'key' values of the params must be unique.
-	ParameterGroups map[string]RemoteConfigParameter `json:"parameterGroups,omitempty"`
+	ParameterGroups map[string]RemoteConfigParameterGroup `json:"parameterGroups,omitempty"`
 	// Parameters: Map of parameter keys to their optional default values and
 	// optional submap
 	// of (condition name : value). Order doesn't affect semantics, and so
@@ -317,6 +317,38 @@ type RemoteConfigParameter struct {
 
 func (s RemoteConfigParameter) MarshalJSON() ([]byte, error) {
 	type NoMethod RemoteConfigParameter
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// RemoteConfigParameterGroup: While default_value and conditional_values are
+// each optional, at least one of
+// the two is required - otherwise, the parameter is meaningless (and
+// an
+// exception will be thrown by the validation logic).
+type RemoteConfigParameterGroup struct {
+	// Description: Optional.
+	// A description for this Parameter. Length must be less than or equal to
+	// 100 characters (or more precisely, unicode code points, which is defined
+	// in
+	// java/com/google/wireless/android/config/ConstsExporter.java).
+	// A description may contain any Unicode characters
+	Description string                           `json:"description,omitempty"`
+	Parameters  map[string]RemoteConfigParameter `json:"parameters,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Description") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Description") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s RemoteConfigParameterGroup) MarshalJSON() ([]byte, error) {
+	type NoMethod RemoteConfigParameterGroup
 	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 

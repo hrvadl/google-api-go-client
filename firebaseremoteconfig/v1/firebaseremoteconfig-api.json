@@ -172,7 +172,7 @@
         },
         "parameterGroups": {
           "additionalProperties": {
-            "$ref": "RemoteConfigParameter"
+            "$ref": "RemoteConfigParameterGroup"
           },
           "description": "Map of parameter keys to their optional default values and optional submap\nof (condition name : value). Order doesn't affect semantics, and so is\nsorted by the server. The 'key' values of the params must be unique.",
           "type": "object"
@@ -226,6 +226,23 @@
             "Purple",
             "Teal"
           ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RemoteConfigParameterGroup": {
+      "description": "While default_value and conditional_values are each optional, at least one of\nthe two is required - otherwise, the parameter is meaningless (and an\nexception will be thrown by the validation logic).",
+      "id": "RemoteConfigParameterGroup",
+      "properties": {
+        "parameters": {
+          "additionalProperties": {
+            "$ref": "RemoteConfigParameter"
+          },
+          "type": "object"
+        },
+        "description": {
+          "description": "Optional.\nA description for this Parameter. Length must be less than or equal to\n100 characters (or more precisely, unicode code points, which is defined in\njava/com/google/wireless/android/config/ConstsExporter.java).\nA description may contain any Unicode characters",
           "type": "string"
         }
       },
